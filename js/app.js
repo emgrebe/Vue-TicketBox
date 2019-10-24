@@ -10,14 +10,6 @@ const app = new Vue({
     specialRequests: '',
     purchaseAgreementSigned: false
   },
-  watch: {
-    specialRequests: function(newRequests, oldRequests) {
-      if(newRequests.toLowerCase().includes('meet and greet')
-      || newRequests.toLowerCase().includes('meet-and-greet')) {
-        this.ticketType = 'vip';
-      }
-    }
-  },
   computed: {
     fullName: {
       get: function() {
@@ -53,6 +45,26 @@ const app = new Vue({
       }
 
       return this.ticketQuantity + ' ' + readableTicketType + ' ' + ticketPluralization;
+    }
+  },
+  watch: {
+    specialRequests: function(newRequests, oldRequests) {
+      if(newRequests.toLowerCase().includes('meet and greet')
+      || newRequests.toLowerCase().includes('meet-and-greet')) {
+        this.ticketType = 'vip';
+      }
+    }
+  },
+  methods: {
+    resetFields: function() {
+      this.firstName = '',
+      this.lastName = '',
+      this.email = '',
+      this.ticketQuantity = 1,
+      this.ticketType = 'general',
+      this.referrals = [],
+      this.specialRequests = '',
+      this.purchaseAgreementSigned = false
     }
   }
 });
